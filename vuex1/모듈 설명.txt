@@ -1,0 +1,42 @@
+1. app.vue (뷰인스턴스)
+
+<h3>{{$store.state.a.modulename}}</h3>
+<button @click="$store.commit('namechange')"></button>
+
+
+state값은 a안에 속한루트를 정해줘야 적용되고
+mutation은 commit하면 알아서 찾기때문에 적용안해도됨
+--------------------------------------------------------------------
+
+2. store >> modules
+
+import moduleA from "./module/moduleA.js";
+
+modules: {  
+    a : moduleA
+},
+
+
+moduleA의 state,mutation을 a 로써 받아와서 적용
+-------------------------------------------------------------------
+
+3. moduleA.js
+
+    const state = () => ({
+        modulename : 'moduleA'
+    })
+
+    const mutations = {
+        namechange(state) {
+            state.modulename = "값이 바뀌었습니다";
+        }
+    };
+
+
+export default {
+    state,
+    mutations
+}
+
+각각 state와 mutation에 들어갈 값을 정해주고 그것들을 const로 선언해준다
+그리고 그 선언한 두가지를 export
